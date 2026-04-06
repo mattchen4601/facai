@@ -12,7 +12,7 @@ export async function getDb() {
   const cloudbase = (await import("@cloudbase/js-sdk")).default;
 
   const app = cloudbase.init({
-    env: "tnt-dzyanvssa",
+    env: "fraud-demo-4gpq3cox1374d2d8",
   });
 
   const auth = app.auth({
