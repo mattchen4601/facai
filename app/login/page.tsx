@@ -37,9 +37,9 @@ export default function LoginPage() {
       }
 
       if (user.role === "admin") {
-        router.push("/admin");
+        window.location.href = "/admin.html";
       } else {
-        router.push("/user");
+        window.location.href = "/user.html";
       }
     } catch (err) {
       console.error(err);
