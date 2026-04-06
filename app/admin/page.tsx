@@ -183,12 +183,8 @@ export default function AdminPage() {
                   </div>
                   {item.status === "pending" ? (
                     <div className="grid grid-cols-2 gap-3">
-                      <button onClick={() => approveRequest(item)} className="rounded-2xl border py-2.5">
-                        批准
-                      </button>
-                      <button onClick={() => rejectRequest(item)} className="rounded-2xl bg-slate-900 py-2.5 text-white">
-                        拒绝
-                      </button>
+                      <button onClick={() => approveRequest(item)} className="rounded-2xl border py-2.5">批准</button>
+                      <button onClick={() => rejectRequest(item)} className="rounded-2xl bg-slate-900 py-2.5 text-white">拒绝</button>
                     </div>
                   ) : null}
                 </div>

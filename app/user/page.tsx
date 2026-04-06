@@ -74,12 +74,7 @@ export default function UserPage() {
     const productRes = await db.collection("products").where({ is_active: true }).get();
     setProducts(productRes.data as ProductDoc[]);
 
-    const invRes = await db
-      .collection("inventory")
-      .where({
-        user_id: freshUser._id,
-      })
-      .get();
+    const invRes = await db.collection("inventory").where({ user_id: freshUser._id }).get();
     setInventory(invRes.data as InventoryDoc[]);
   };
 
@@ -239,18 +234,9 @@ export default function UserPage() {
             <section className="rounded-3xl border bg-white p-6 shadow-sm space-y-4">
               <div className="text-xl font-semibold">操作区</div>
               <div className="grid gap-4 md:grid-cols-[1fr_auto_auto]">
-                <input
-                  className="rounded-2xl border px-3 py-2"
-                  placeholder="输入金额"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                />
-                <button onClick={submitRecharge} className="rounded-2xl border px-5 py-2.5">
-                  充值
-                </button>
-                <button onClick={submitWithdraw} className="rounded-2xl bg-slate-900 px-5 py-2.5 text-white">
-                  提现
-                </button>
+                <input className="rounded-2xl border px-3 py-2" placeholder="输入金额" value={amount} onChange={(e) => setAmount(e.target.value)} />
+                <button onClick={submitRecharge} className="rounded-2xl border px-5 py-2.5">充值</button>
+                <button onClick={submitWithdraw} className="rounded-2xl bg-slate-900 px-5 py-2.5 text-white">提现</button>
               </div>
               {message ? <div className="text-sm text-amber-800">{message}</div> : null}
             </section>
@@ -267,19 +253,10 @@ export default function UserPage() {
               <div className="grid gap-4 md:grid-cols-2">
                 {products.map((item) => (
                   <div key={item._id} className="rounded-2xl border bg-slate-50 p-4 space-y-3">
-                    <img
-                      src={item.image_url || "/art.jpg"}
-                      alt={item.name}
-                      className="h-52 w-full rounded-2xl border object-cover"
-                    />
+                    <img src={item.image_url || "/art.jpg"} alt={item.name} className="h-52 w-full rounded-2xl border object-cover" />
                     <div className="font-semibold">{item.name}</div>
                     <div className="text-sm text-slate-600">价格：¥{item.price}</div>
-                    <button
-                      onClick={() => buyProduct(item)}
-                      className="rounded-2xl bg-slate-900 px-4 py-2 text-white"
-                    >
-                      买入
-                    </button>
+                    <button onClick={() => buyProduct(item)} className="rounded-2xl bg-slate-900 px-4 py-2 text-white">买入</button>
                   </div>
                 ))}
               </div>
@@ -293,21 +270,12 @@ export default function UserPage() {
                 ) : (
                   inventory.map((item) => (
                     <div key={item._id} className="rounded-2xl border bg-slate-50 p-4 space-y-3">
-                      <img
-                        src={item.image_url || "/art.jpg"}
-                        alt={item.product_name}
-                        className="h-52 w-full rounded-2xl border object-cover"
-                      />
+                      <img src={item.image_url || "/art.jpg"} alt={item.product_name} className="h-52 w-full rounded-2xl border object-cover" />
                       <div className="font-semibold">{item.product_name}</div>
                       <div className="text-sm text-slate-600">买入价：¥{item.buy_price}</div>
                       <div className="text-sm text-slate-600">状态：{item.status}</div>
                       {item.status === "holding" || item.status === "sell_rejected" ? (
-                        <button
-                          onClick={() => submitSellRequest(item)}
-                          className="rounded-2xl border px-4 py-2"
-                        >
-                          申请卖出
-                        </button>
+                        <button onClick={() => submitSellRequest(item)} className="rounded-2xl border px-4 py-2">申请卖出</button>
                       ) : null}
                     </div>
                   ))

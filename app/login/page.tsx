@@ -24,13 +24,7 @@ export default function LoginPage() {
         return;
       }
 
-      const res = await db
-        .collection("users")
-        .where({
-          username,
-          password,
-        })
-        .get();
+      const res = await db.collection("users").where({ username, password }).get();
 
       if (!res.data.length) {
         setMsg("账号或密码错误");
@@ -38,7 +32,6 @@ export default function LoginPage() {
       }
 
       const user = res.data[0];
-
       if (typeof window !== "undefined") {
         localStorage.setItem("demo_user", JSON.stringify(user));
       }
@@ -50,7 +43,7 @@ export default function LoginPage() {
       }
     } catch (err) {
       console.error(err);
-      setMsg("登录失败，请检查 CloudBase 权限或网络");
+      setMsg("登录失败，请检查 CloudBase 配置或网络");
     }
   };
 
@@ -71,32 +64,14 @@ export default function LoginPage() {
         <div className="mt-6 space-y-4">
           <div>
             <label className="text-sm font-medium">账号</label>
-            <input
-              className="mt-1 w-full rounded-2xl border px-3 py-2"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="请输入账号"
-            />
+            <input className="mt-1 w-full rounded-2xl border px-3 py-2" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="请输入账号" />
           </div>
           <div>
             <label className="text-sm font-medium">密码</label>
-            <input
-              type="password"
-              className="mt-1 w-full rounded-2xl border px-3 py-2"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="请输入密码"
-            />
+            <input type="password" className="mt-1 w-full rounded-2xl border px-3 py-2" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="请输入密码" />
           </div>
-          <button
-            onClick={handleLogin}
-            className="w-full rounded-2xl bg-slate-900 py-3 text-white font-medium"
-          >
-            登录
-          </button>
-
+          <button onClick={handleLogin} className="w-full rounded-2xl bg-slate-900 py-3 text-white font-medium">登录</button>
           {msg ? <div className="text-sm text-rose-700">{msg}</div> : null}
-
           <div className="rounded-2xl bg-slate-50 border p-4 text-sm text-slate-700 space-y-1">
             <div>管理员：cgw / 123</div>
             <div>测试用户：demo1 / 123456</div>
