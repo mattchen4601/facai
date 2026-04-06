@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
   useEffect(() => {
-    router.replace("/login");
+    window.location.href = "/login.html";
   }, [router]);
 
   return <div style={{ padding: 20 }}>跳转中...</div>;
