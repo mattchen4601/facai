@@ -54,7 +54,7 @@ export default function UserPage() {
 
     const raw = typeof window !== "undefined" ? localStorage.getItem("demo_user") : null;
     if (!raw) {
-      router.push("/login");
+      window.location.href = "/login.html";
       return;
     }
     const localUser = JSON.parse(raw);
@@ -201,7 +201,7 @@ export default function UserPage() {
     if (typeof window !== "undefined") {
       localStorage.removeItem("demo_user");
     }
-    router.push("/login");
+    window.location.href = "/login.html";
   };
 
   return (
